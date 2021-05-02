@@ -2,10 +2,14 @@ package com.errabi.ams.entities;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -18,4 +22,7 @@ public class Planning extends BaseEntity{
     private LocalTime startMorningTime ;
     private LocalTime endMorningTime ;
     private Boolean enabled ;
+
+    @OneToMany(mappedBy = "location")
+    private Set<PlanningLocationConfig> planningLocationConfigs = new HashSet<PlanningLocationConfig>();
 }
