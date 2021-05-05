@@ -2,6 +2,7 @@ package com.errabi.ams.controllers.api;
 
 import com.errabi.ams.controllers.dto.PlanningDto;
 import com.errabi.ams.services.IPlanningService;
+import com.errabi.ams.services.exception.AmsException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -33,21 +34,21 @@ public class PlanningController {
 
     @PutMapping("/plannings")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePlanning(@RequestBody @Valid PlanningDto planningDto){
+    public void updatePlanning(@RequestBody @Valid PlanningDto planningDto) throws AmsException {
         log.debug("Updating planning ... {}",planningDto);
         planningService.update(planningDto);
     }
 
     @PutMapping("/plannings/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePlanning(@PathVariable(name = "id") UUID id ){
+    public void deletePlanning(@PathVariable(name = "id") UUID id ) throws AmsException {
         log.debug("deleting planning with id... {}",id);
         planningService.delete(id);
     }
 
     @PutMapping("/plannings/{id}/{enabled}")
     @ResponseStatus(HttpStatus.OK)
-    public void publishPlanning(@PathVariable(name = "id") UUID id ,@PathVariable(name = "enabled") Boolean enabled ){
+    public void publishPlanning(@PathVariable(name = "id") UUID id ,@PathVariable(name = "enabled") Boolean enabled ) throws AmsException {
         log.debug("Publishing planning with id... {}",id);
         planningService.publishPlanning(id,enabled);
     }

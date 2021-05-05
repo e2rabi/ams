@@ -2,7 +2,7 @@ package com.errabi.ams.entities;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Singular;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +13,7 @@ import java.util.Set;
 @Data
 @Entity
 @Builder
+@DynamicUpdate
 public class Planning extends BaseEntity{
     private String name ;
     private String description ;
@@ -20,6 +21,8 @@ public class Planning extends BaseEntity{
     private LocalDate endDate ;
     private LocalTime startMorningTime ;
     private LocalTime endMorningTime ;
+    private LocalTime startAfternoonTime ;
+    private LocalTime endMAfternoonTime ;
     private Boolean enabled ;
 
     @OneToMany(mappedBy = "location")
